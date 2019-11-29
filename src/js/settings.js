@@ -1,5 +1,3 @@
-/* global Handlebars */
-
 import Handlebars from './utils.js';
 
 export const select = {
