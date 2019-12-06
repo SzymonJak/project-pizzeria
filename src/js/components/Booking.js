@@ -67,6 +67,7 @@ class Booking {
     const thisBooking = this;
 
     thisBooking.booked = {};
+    console.log('czy cos', thisBooking.booked);
 
     for(let item of eventsCurrent){
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
@@ -86,7 +87,7 @@ class Booking {
         }
       }
     }
-    // console.log('thisBooking', thisBooking.booked);
+    console.log('thisBooking', thisBooking.booked);
 
     thisBooking.updateDOM();
   }
@@ -115,7 +116,7 @@ class Booking {
     const thisBooking = this;
 
     thisBooking.date = thisBooking.datePicker.value;
-    thisBooking.hour = utils.hourToNumber(thisBooking.datePicker.value);
+    thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
 
     let allAvailable = false;
 
@@ -136,7 +137,7 @@ class Booking {
       if(
         !allAvailable
         &&
-        thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId) > -1
+        thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
       ){
         table.classList.add(classNames.booking.tableBooked);
       } else {
