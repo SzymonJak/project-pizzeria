@@ -147,7 +147,7 @@ class Booking {
 
       table.addEventListener('click', function(){
         event.preventDefault();
-        table.classList.add(classNames.booking.tableBooked);
+        table.classList.add(classNames.booking.tablePicked);
         thisBooking.table = tableId;
       });
 
@@ -196,10 +196,8 @@ class Booking {
       })
       .then(function(parsedResponse){
         console.log('parsedResponse', parsedResponse);
+        thisBooking.getData();
       });
-
-    thisBooking.getData();
-    thisBooking.updateDOM();
   }
 
   initBooking(){
@@ -207,7 +205,11 @@ class Booking {
 
     thisBooking.dom.form.addEventListener('submit', function(){
       event.preventDefault();
-      thisBooking.sendBooking();
+      if(!isNaN(thisBooking.table)){
+        thisBooking.sendBooking();
+      } else {
+        thisBooking.dom.form.querySelector('.btn-secondary').classList.add('no-table');
+      }
     });
   }
 
@@ -244,6 +246,10 @@ class Booking {
 
     thisBooking.dom.wrapper.addEventListener('updated', function(){
       thisBooking.updateDOM();
+      for(let table of thisBooking.dom.tables){
+        table.classList.remove(classNames.booking.tablePicked);
+        thisBooking.table = undefined;
+      }
     });
   }
 }
