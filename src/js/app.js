@@ -2,6 +2,7 @@ import {settings, select, classNames} from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
+// import Carousel from './components/Carousel.js';
 
 const app = {
   initPages: function(){
@@ -104,6 +105,24 @@ const app = {
     thisApp.newBooking = new Booking(bookingContainer);
   },
 
+  initCarousel: function(){
+    const carousel = document.querySelector('.carousel');
+    const carouselTiles = carousel.querySelectorAll('.carousel__tile');
+    let index = 0;
+
+    setInterval(function(){
+      for (let i = 0; i < carouselTiles.length; i++){
+        carouselTiles[i].classList.remove('active');
+      }
+      carouselTiles[index].classList.add('active');
+      if (index < carouselTiles.length - 1){
+        index++;
+      } else {
+        index = 0;
+      }
+    }, 3000);
+  },
+
   init: function(){
     const thisApp = this;
     console.log('*** App starting ***');
@@ -112,6 +131,7 @@ const app = {
     thisApp.initData();
     thisApp.initCart();
     thisApp.initBooking();
+    thisApp.initCarousel();
   },
 };
 

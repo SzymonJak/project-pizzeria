@@ -1,0 +1,243 @@
+.main__wrapper {
+  padding: ($base-size * 3) 0;
+  background: lighten($color-dark, 70%);
+}
+
+.wrapper {
+  background: $color-light;
+  border-radius: $radius;
+  padding: ($base-size * 6) ($base-size * 3);
+}
+
+.main-nav {
+  //   position: absolute;
+  @include flex(row, center, space-between);
+  flex-wrap: wrap;
+
+  .opening {
+    background: $color-main;
+    border-radius: $radius;
+    padding: ($base-size * 3) 0;
+    margin-top: $base-size;
+    width: 100%;
+    text-align: center;
+
+    span {
+      @extend .h2;
+      display: block;
+      color: $color-light;
+
+      &:first-of-type {
+        font-size: 26px;
+      }
+
+      &:last-of-type {
+        font-family: $font-header;
+        font-weight: lighter;
+      }
+    }
+  }
+
+  .box1 {
+    width: calc(50% - 6px);
+    background-image: url("../images/main-page/pizza-1.jpg");
+    background-position: center center;
+    background-size: cover;
+    border-radius: $radius;
+    text-align: center;
+    padding-top: 4 * $base-size;
+    height: 12 * $base-size;
+    overflow: hidden;
+    
+    a {
+      @extend .h2;
+      font-size: 26px;
+      color: $color-light;
+      text-decoration: none;
+      padding: 4 * $base-size;
+
+      &.active {
+        background: lighten($color-dark, 75%);
+      }
+    }
+
+    span {
+      display: block;
+      opacity: 0;
+      padding-top: 3 * $base-size;
+      color: $color-light;
+    }
+
+    &:hover {
+      animation: change 1s;
+      animation-fill-mode: forwards;
+    }
+
+    &:hover span {
+      animation: show-me 1s;
+      animation-fill-mode: forwards;
+    }
+    @keyframes change {
+      from {padding-top: 4 * $base-size;}
+
+      to {padding-top: $base-size;}
+    }
+    @keyframes show-me {
+      from {opacity: .2;}
+
+      to {opacity: 1;
+        padding-top: $base-size;}
+    }
+  }
+
+  .box2 {
+    @extend .box1;
+    background-image: url("../images/main-page/pizza-2.jpg");
+  }
+}
+
+
+.carousel-wrapper {
+  overflow: hidden;
+  width: 100%;
+  padding: $base-size 0;
+}
+
+.carousel {
+  transform-style: preserve-3d;
+  width: 100%;
+
+  .carousel__tile {
+    @include flex(row, center, space-between);
+    flex-wrap: nowrap;
+    height: 400px;
+    width: 100%;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    padding: $base-size, ($base-size * 4);
+    z-index: 100;
+    transition: transform .5s, opacity .5s, z-index .5s;
+    
+
+    &.active {
+      opacity: 1;
+      position: relative;
+      // z-index: 900;
+    }
+    
+    div:first-of-type {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      // display: block;
+      // object-fit: cover;
+      // height: 200px;
+      border-radius: $radius;
+      margin-right: $base-size;
+
+      .carousel__photo {
+        flex-shrink: 0;
+        height: 250px;
+        object-fit: cover;
+        max-width: 100%;
+        max-height: 100%;
+        
+      }
+    }
+
+    div:last-of-type {
+      flex: 0 0 66%;
+      // height: 200px;
+      padding-left: $base-size;
+
+      h3 {
+        font-family: $font-header;
+        font-size: 16px;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+.gallery {
+  @include flex(row, flex-start, space-between);
+  flex-wrap: wrap;
+  
+  .gallery__photo {
+    flex: 0 0 32%;
+    overflow: hidden;
+    height: 250px;
+    border-radius: $radius;
+    margin-bottom: $base-size;
+    padding-left: $base-size;
+
+    &:hover .layer {
+      display: block;
+    }
+    
+    &:nth-of-type(1) {
+      background: url("../images/main-page/pizza-4.jpg");
+    }
+
+    &:nth-of-type(2) {
+      background: url("../images/main-page/pizza-5.jpg");
+      // margin: 0 $base-size;
+    }
+
+    &:nth-of-type(3) {
+      background: url("../images/main-page/pizza-6.jpg");
+    }
+
+    &:nth-of-type(4) {
+      background: url("../images/main-page/pizza-7.jpg");
+    }
+
+    &:nth-of-type(5) {
+      background: url("../images/main-page/pizza-8.jpg");
+    }
+
+    &:nth-of-type(6) {
+      background: url("../images/main-page/pizza-9.jpg");
+    }
+  }
+
+  .layer {
+    height: 250px;
+    background: $color-dark;
+    opacity: .7;
+    display: none;
+    position: relative;
+    margin-left: -$base-size;
+
+    a {
+      @include center();
+      left: 40%;
+      text-decoration: none;
+      font-size: 2 * $base-size;
+      color: $color-light;
+      cursor: pointer;
+
+      &:hover i {
+        color: $color-main;
+      }
+
+      i {
+        color: $color-light;
+      }
+
+      &:last-of-type {
+        left: 60%;
+      }
+    }
+  }
+
+  .insta__link {
+    padding: $base-size 0;
+
+    a {
+      color: $color-main;
+    }
+  }
+}

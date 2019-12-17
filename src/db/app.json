@@ -81,7 +81,7 @@
           "label": "Toppings",
           "type": "checkboxes",
           "options": {
-            "olives": {
+            "olives2": {
               "label": "Olives",
               "price": 2,
               "default": true
