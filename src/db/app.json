@@ -266,9 +266,9 @@
   "booking": [ 
     {    
       "id": 1,
-      "date": "2019-12-15",
+      "date": "2019-12-24",
       "hour": "16:30",
-      "table": 1,
+      "table": [1, 2],
       "repeat": false,
       "duration": 3,
       "ppl": 2,

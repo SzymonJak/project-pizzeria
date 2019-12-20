@@ -74,8 +74,12 @@ class Booking {
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
     }
 
-    for(let item of bookings){
-      for (let i in item.table){
+    for(let item of bookings){      
+      if(Array.isArray(item.table) == true){
+        for (let i in item.table){
+          thisBooking.makeBooked(item.date, item.hour, item.duration, item.table[i]);
+        }
+      } else {
         thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
       }
     }
@@ -90,7 +94,6 @@ class Booking {
         }
       }
     }
-    // console.log('thisBooking', thisBooking.booked);
 
     thisBooking.updateDOM();
   }
@@ -105,12 +108,10 @@ class Booking {
     const startHour = utils.hourToNumber(hour);
 
     for(let hourBlock = startHour; hourBlock < startHour + duration; hourBlock += 0.5){
-      // console.log('loop', hourBlock);
 
       if(typeof thisBooking.booked[date][hourBlock] == 'undefined'){
         thisBooking.booked[date][hourBlock] = [];
       }
-  
       thisBooking.booked[date][hourBlock].push(table);
     }
   }
@@ -122,7 +123,6 @@ class Booking {
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
 
     let allAvailable = false;
-
     if(
       typeof thisBooking.booked[thisBooking.date] == 'undefined'
       ||
@@ -136,7 +136,6 @@ class Booking {
       if(!isNaN(tableId)){
         tableId = parseInt(tableId);
       }
-
       if(
         !allAvailable
         &&
@@ -147,27 +146,18 @@ class Booking {
         table.classList.remove(classNames.booking.tableBooked);
       }
 
-      thisBooking.table = [];
-
+      
+      
       table.addEventListener('click', function(){
         event.preventDefault();
+        
         table.classList.add(classNames.booking.tablePicked);
-        thisBooking.table.push(tableId);
-        console.log('added', thisBooking.table);
+        
+        if(!thisBooking.table.includes(tableId)){
+          thisBooking.table.push(tableId);
+        }
+        console.log('this table', thisBooking.table);
       });
-
-      // if(!thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)){
-      //   table.addEventListener('click', function(){
-      //     event.preventDefault();
-      //     if(thisBooking.table == 'undefined'){
-      //       table.classList.add(classNames.booking.tableBooked);
-      //       thisBooking.table = tableId;
-      //     } else {
-      //       table.classList.remove(classNames.booking.tableBooked);
-      //       thisBooking.table = 'table not picked';
-      //     }
-      //   });
-      // }
     }
   }
 
@@ -207,6 +197,7 @@ class Booking {
 
   initBooking(){
     const thisBooking = this;
+    // thisBooking.table = [];
 
     thisBooking.dom.form.addEventListener('submit', function(){
       event.preventDefault();
@@ -251,11 +242,11 @@ class Booking {
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
 
     thisBooking.dom.wrapper.addEventListener('updated', function(){
-      // thisBooking.updateDOM();
+      thisBooking.updateDOM();
       for(let table of thisBooking.dom.tables){
         table.classList.remove(classNames.booking.tablePicked);
         // thisBooking.table = undefined;
-        thisBooking.table.length = 0;
+        thisBooking.table = [];
       }
     });
   }
