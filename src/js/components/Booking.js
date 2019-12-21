@@ -146,7 +146,7 @@ class Booking {
         table.classList.remove(classNames.booking.tableBooked);
       }
 
-      
+      thisBooking.table = [];
       
       table.addEventListener('click', function(){
         event.preventDefault();
@@ -246,7 +246,7 @@ class Booking {
       for(let table of thisBooking.dom.tables){
         table.classList.remove(classNames.booking.tablePicked);
         // thisBooking.table = undefined;
-        thisBooking.table = [];
+        thisBooking.table.length = 0;
       }
     });
   }
