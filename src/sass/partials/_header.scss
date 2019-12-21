@@ -34,3 +34,27 @@
   }
 
 }
+
+.home-elem {
+  position: absolute;
+  margin-top: 5.4 * $base-size;
+  
+  &:hover a{
+    color: $color-main;
+  }
+
+  a {
+    text-decoration: none;
+    color: $color-light;
+    padding-right: $base-size;
+    border: 1px solid $color-light;
+    border-bottom: 0;
+    border-top-left-radius: $radius;
+    border-top-right-radius: $radius;
+    padding: $base-size;
+
+    i {
+      padding-right: $base-size;
+    }
+  }
+}
