@@ -146,7 +146,7 @@ class Booking {
         table.classList.remove(classNames.booking.tableBooked);
       }
 
-      thisBooking.table = [];
+      // thisBooking.table = [];
       
       table.addEventListener('click', function(){
         event.preventDefault();
@@ -213,6 +213,7 @@ class Booking {
   render(bookingContainer) {
     const thisBooking = this;
 
+    thisBooking.table = [];
     const generatedHTML = templates.bookingWidget();
     
     thisBooking.dom = {};
