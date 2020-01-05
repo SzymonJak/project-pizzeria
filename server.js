@@ -1,9 +1,9 @@
-/* global require, process */
+/* global process */
 
-const jsonServer = require('json-server');
-const server = jsonServer.create();
-const router = jsonServer.router('dist/db/app.json');
-const middlewares = jsonServer.defaults({
+import { create, router as _router, defaults } from 'json-server';
+const server = create();
+const router = _router('dist/db/app.json');
+const middlewares = defaults({
   static: 'dist',
   noCors: true
 });
